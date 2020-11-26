@@ -1,0 +1,45 @@
+﻿<h3>USDConverter</h3>
+
+<div class="form-group">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>USD</label>
+            <input type="number" class="form-control" placeholder="USD..." @bind="USD" />
+        </div>
+        <div class="form-group">
+            <label>Exchange rate</label>
+            <input type="number" class="form-control" placeholder="3,96.." @bind="ExRate" />
+        </div>
+        <button class="btn btn-primary" @onclick="ConvertToPln">
+            <span class="oi oi-clock" aria-hidden="true"></span> Convert
+        </button>
+    </div>
+
+    @if (_pln != null)
+    {
+        <div class="row blockquote mt-5">
+            <span>@USD$ equal to @_pln zł !</span>
+        </div>
+    }
+</div>
+
+@code {
+        double? _pln = null;
+
+    public double USD { get; set; }
+
+    public double ExRate { get; set; }
+
+    public void ConvertToPln()
+    {
+        if (ExRate != 0)
+        {
+            _pln = USD * ExRate;
+        }
+        else
+        {
+            _pln = USD * 3.96;
+        }
+    }
+
+}
